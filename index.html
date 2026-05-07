@@ -173,14 +173,17 @@
             </div>
         </div>
 
+        <!-- Mobile Menu Backdrop -->
+        <div id="menu-backdrop" class="fixed inset-0 bg-slate-900/10 backdrop-blur-sm z-40 opacity-0 invisible transition-all duration-500 md:hidden"></div>
+
         <!-- Mobile Menu Overlay -->
-        <div id="mobile-menu" class="fixed top-24 inset-x-6 md:hidden bg-white/60 backdrop-blur-lg border border-white/40 p-6 flex flex-col space-y-4 rounded-3xl shadow-2xl transition-all duration-300 ease-in-out opacity-0 invisible scale-95 origin-top pointer-events-none z-50">
-            <a href="#home" class="nav-liquid-glass mobile-link text-slate-700 font-medium hover:text-blue-600 transition-all p-3 rounded-2xl">Home</a>
-            <a href="#about" class="nav-liquid-glass mobile-link text-slate-700 font-medium hover:text-blue-600 transition-all p-3 rounded-2xl">Tentang</a>
-            <a href="#projects" class="nav-liquid-glass mobile-link text-slate-700 font-medium hover:text-blue-600 transition-all p-3 rounded-2xl">Proyek</a>
-            <a href="#experience" class="nav-liquid-glass mobile-link text-slate-700 font-medium hover:text-blue-600 transition-all p-3 rounded-2xl">Pengalaman</a>
-            <a href="#education" class="nav-liquid-glass mobile-link text-slate-700 font-medium hover:text-blue-600 transition-all p-3 rounded-2xl">Pendidikan</a>
-            <a href="#achievements" class="nav-liquid-glass mobile-link text-slate-700 font-medium hover:text-blue-600 transition-all p-3 rounded-2xl">Prestasi</a>
+        <div id="mobile-menu" class="fixed top-24 inset-x-6 md:hidden bg-white/70 backdrop-blur-xl border border-white/40 p-4 flex flex-col space-y-1 rounded-[2.5rem] shadow-2xl transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] opacity-0 invisible -translate-y-4 pointer-events-none z-50">
+            <a href="#home" class="nav-liquid-glass mobile-link text-slate-800 font-semibold hover:text-blue-600 transition-all p-4 rounded-2xl flex items-center justify-between">Home <i class="fa-solid fa-chevron-right text-[10px] opacity-20"></i></a>
+            <a href="#about" class="nav-liquid-glass mobile-link text-slate-800 font-semibold hover:text-blue-600 transition-all p-4 rounded-2xl flex items-center justify-between">Tentang <i class="fa-solid fa-chevron-right text-[10px] opacity-20"></i></a>
+            <a href="#projects" class="nav-liquid-glass mobile-link text-slate-800 font-semibold hover:text-blue-600 transition-all p-4 rounded-2xl flex items-center justify-between">Proyek <i class="fa-solid fa-chevron-right text-[10px] opacity-20"></i></a>
+            <a href="#experience" class="nav-liquid-glass mobile-link text-slate-800 font-semibold hover:text-blue-600 transition-all p-4 rounded-2xl flex items-center justify-between">Pengalaman <i class="fa-solid fa-chevron-right text-[10px] opacity-20"></i></a>
+            <a href="#education" class="nav-liquid-glass mobile-link text-slate-800 font-semibold hover:text-blue-600 transition-all p-4 rounded-2xl flex items-center justify-between">Pendidikan <i class="fa-solid fa-chevron-right text-[10px] opacity-20"></i></a>
+            <a href="#achievements" class="nav-liquid-glass mobile-link text-slate-800 font-semibold hover:text-blue-600 transition-all p-4 rounded-2xl flex items-center justify-between">Prestasi <i class="fa-solid fa-chevron-right text-[10px] opacity-20"></i></a>
         </div>
     </nav>
 
@@ -599,27 +602,36 @@
         // Mobile Menu Toggle
         const menuToggle = document.getElementById('menu-toggle');
         const mobileMenu = document.getElementById('mobile-menu');
+        const menuBackdrop = document.getElementById('menu-backdrop');
         const mobileLinks = document.querySelectorAll('.mobile-link');
         const menuIcon = menuToggle.querySelector('i');
 
-        menuToggle.addEventListener('click', () => {
+        function toggleMenu() {
+            const isOpen = !mobileMenu.classList.contains('opacity-0');
+            
             mobileMenu.classList.toggle('opacity-0');
             mobileMenu.classList.toggle('invisible');
-            mobileMenu.classList.toggle('scale-95');
+            mobileMenu.classList.toggle('-translate-y-4');
             mobileMenu.classList.toggle('pointer-events-none');
+            
+            menuBackdrop.classList.toggle('opacity-0');
+            menuBackdrop.classList.toggle('invisible');
             
             // Animasi ikon
             menuIcon.classList.toggle('fa-bars-staggered');
             menuIcon.classList.toggle('fa-xmark');
-        });
+
+            // Prevent scroll when menu is open
+            document.body.style.overflow = isOpen ? '' : 'hidden';
+            if (isOpen) lenis.start(); else lenis.stop();
+        }
+
+        menuToggle.addEventListener('click', toggleMenu);
+        menuBackdrop.addEventListener('click', toggleMenu);
 
         // Close menu when a link is clicked
         mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('opacity-0', 'invisible', 'scale-95', 'pointer-events-none');
-                menuIcon.classList.add('fa-bars-staggered');
-                menuIcon.classList.remove('fa-xmark');
-            });
+            link.addEventListener('click', toggleMenu);
         });
 
         // Back to Top Logic
@@ -649,10 +661,12 @@
                 // Tambahkan kelas untuk tampilan navbar saat discroll
                 navbar.classList.add('bg-white/80', 'backdrop-blur-md', 'border-b', 'border-slate-200', 'h-16');
                 navbar.classList.remove('h-24');
+                mobileMenu.style.top = '5rem';
             } else {
                 // Hapus kelas untuk mengembalikan tampilan navbar ke awal
                 navbar.classList.remove('bg-white/80', 'backdrop-blur-md', 'border-b', 'border-slate-200', 'h-16');
                 navbar.classList.add('h-24');
+                mobileMenu.style.top = '6rem';
             }
         });
 
