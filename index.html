@@ -20,8 +20,8 @@
         
         .glass-card {
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
-            backdrop-filter: blur(25px) saturate(180%);
-            -webkit-backdrop-filter: blur(25px) saturate(180%);
+            backdrop-filter: blur(15px) saturate(180%); /* Reduced blur for mobile performance */
+            -webkit-backdrop-filter: blur(15px) saturate(180%); /* Reduced blur for mobile performance */
             border: 1px solid rgba(255, 255, 255, 0.4);
             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.04);
             position: relative;
@@ -29,8 +29,13 @@
         }
 
         .tilt-card {
-            transition: transform 0.1s ease-out, box-shadow 0.3s ease, border-color 0.3s ease !important;
             transform-style: preserve-3d;
+        }
+        /* Disable tilt transition on mobile */
+        @media (min-width: 768px) { /* Tailwind's md breakpoint */
+            .tilt-card {
+                transition: transform 0.1s ease-out, box-shadow 0.3s ease, border-color 0.3s ease !important;
+            }
         }
 
         .glare-effect {
@@ -169,7 +174,7 @@
         </div>
 
         <!-- Mobile Menu Overlay -->
-        <div id="mobile-menu" class="fixed top-24 inset-x-6 md:hidden bg-white/60 backdrop-blur-2xl border border-white/40 p-6 flex flex-col space-y-4 rounded-3xl shadow-2xl transition-all duration-300 ease-in-out opacity-0 invisible scale-95 origin-top pointer-events-none z-50">
+        <div id="mobile-menu" class="fixed top-24 inset-x-6 md:hidden bg-white/60 backdrop-blur-lg border border-white/40 p-6 flex flex-col space-y-4 rounded-3xl shadow-2xl transition-all duration-300 ease-in-out opacity-0 invisible scale-95 origin-top pointer-events-none z-50">
             <a href="#home" class="nav-liquid-glass mobile-link text-slate-700 font-medium hover:text-blue-600 transition-all p-3 rounded-2xl">Home</a>
             <a href="#about" class="nav-liquid-glass mobile-link text-slate-700 font-medium hover:text-blue-600 transition-all p-3 rounded-2xl">Tentang</a>
             <a href="#projects" class="nav-liquid-glass mobile-link text-slate-700 font-medium hover:text-blue-600 transition-all p-3 rounded-2xl">Proyek</a>
