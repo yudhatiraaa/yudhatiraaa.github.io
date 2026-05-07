@@ -9,8 +9,50 @@
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <style>
-        body { font-family: 'Inter', sans-serif; }
+        body { 
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(at 0% 0%, rgba(224, 231, 255, 1) 0, transparent 50%), 
+                        radial-gradient(at 50% 0%, rgba(199, 210, 254, 0.5) 0, transparent 50%), 
+                        radial-gradient(at 100% 0%, rgba(165, 180, 252, 0.4) 0, transparent 50%),
+                        #f8fafc;
+            background-attachment: fixed;
+        }
         
+        .glass-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
+            backdrop-filter: blur(25px) saturate(180%);
+            -webkit-backdrop-filter: blur(25px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.04);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tilt-card {
+            transition: transform 0.1s ease-out, box-shadow 0.3s ease, border-color 0.3s ease !important;
+            transform-style: preserve-3d;
+        }
+
+        .glare-effect {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 20;
+            transition: background 0.1s ease;
+        }
+
+        .glass-card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, transparent 50%, rgba(255,255,255,0.1) 100%);
+            pointer-events: none;
+        }
+        
+        .blob-effect {
+            transition: transform 0.3s ease-out;
+        }
+
         /* Efek fade-out di bawah agar foto tidak terlihat terpotong */
         .mask-bottom-fade {
             -webkit-mask-image: linear-gradient(to top, transparent 5%, black 25%);
@@ -60,40 +102,80 @@
             from, to { opacity: 1 }
             50% { opacity: 0 }
         }
+        .nav-liquid-glass {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid transparent;
+        }
+        .nav-liquid-glass:hover {
+            background: rgba(255, 255, 255, 0.3) !important;
+            backdrop-filter: blur(12px) saturate(180%);
+            -webkit-backdrop-filter: blur(12px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+        }
+        .nav-active {
+            color: #3b82f6 !important;
+            position: relative;
+        }
+        .nav-active::after {
+            content: "";
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 16px;
+            height: 4px;
+            background: rgba(59, 130, 246, 0.6);
+            border-radius: 99px;
+            backdrop-filter: blur(4px);
+            box-shadow: 0 2px 10px rgba(59, 130, 246, 0.3);
+            transition: all 0.3s ease;
+        }
+        .moving-gradient-text {
+            background: linear-gradient(to right, #3b82f6, #8b5cf6, #ec4899, #3b82f6);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradient-move-text 4s linear infinite;
+        }
+        @keyframes gradient-move-text {
+            to { background-position: 200% center; }
+        }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900">
+<body class="text-slate-900">
 
     <!-- Navbar -->
     <nav id="navbar" class="fixed w-full z-50 transition-all duration-500 h-24 flex items-center">
         <div class="max-w-6xl mx-auto px-6 w-full flex items-center justify-between">
-            <a href="#home" class="text-xl md:text-2xl font-bold tracking-tighter text-slate-900 hover:opacity-80 transition-opacity">
-                Yudha<span class="text-blue-600">.</span>
+            <a href="#home" class="text-xl md:text-2xl font-bold tracking-tighter hover:opacity-80 transition-opacity moving-gradient-text">
+                Yudha.
             </a>
             
             <!-- Mobile Menu Toggle Button -->
-            <button id="menu-toggle" class="md:hidden text-slate-900 focus:outline-none p-2 hover:bg-slate-100 rounded-full transition-all">
+            <button id="menu-toggle" class="md:hidden text-slate-900 focus:outline-none p-2 hover:bg-white/50 rounded-full transition-all">
                 <i class="fa-solid fa-bars-staggered text-xl transition-colors"></i>
             </button>
 
             <div class="hidden md:flex items-center space-x-1">
-                <a href="#home" class="px-4 py-2 rounded-full text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-all">Home</a>
-                <a href="#about" class="px-4 py-2 rounded-full text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-all">Tentang</a>
-                <a href="#projects" class="px-4 py-2 rounded-full text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-all">Proyek</a>
-                <a href="#experience" class="px-4 py-2 rounded-full text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-all">Pengalaman</a>
-                <a href="#education" class="px-4 py-2 rounded-full text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-all">Pendidikan</a>
-                <a href="#achievements" class="px-4 py-2 rounded-full text-sm font-medium bg-slate-900 text-white hover:bg-blue-600 transition-all ml-4">Prestasi</a>
+                <a href="#home" class="nav-liquid-glass px-4 py-2 rounded-full text-sm font-medium text-slate-600 hover:text-slate-900 transition-all">Home</a>
+                <a href="#about" class="nav-liquid-glass px-4 py-2 rounded-full text-sm font-medium text-slate-600 hover:text-slate-900 transition-all">Tentang</a>
+                <a href="#projects" class="nav-liquid-glass px-4 py-2 rounded-full text-sm font-medium text-slate-600 hover:text-slate-900 transition-all">Proyek</a>
+                <a href="#experience" class="nav-liquid-glass px-4 py-2 rounded-full text-sm font-medium text-slate-600 hover:text-slate-900 transition-all">Pengalaman</a>
+                <a href="#education" class="nav-liquid-glass px-4 py-2 rounded-full text-sm font-medium text-slate-600 hover:text-slate-900 transition-all">Pendidikan</a>
+                <a href="#achievements" class="nav-liquid-glass px-4 py-2 rounded-full text-sm font-medium text-slate-600 hover:text-slate-900 transition-all">Prestasi</a>
             </div>
         </div>
 
         <!-- Mobile Menu Overlay -->
-        <div id="mobile-menu" class="fixed top-20 inset-x-6 md:hidden bg-white/90 backdrop-blur-xl border border-slate-200 p-6 flex flex-col space-y-4 rounded-3xl shadow-2xl transition-all duration-300 ease-in-out opacity-0 invisible scale-95 origin-top pointer-events-none z-50">
-            <a href="#home" class="mobile-link text-slate-700 font-medium hover:text-blue-600 transition-colors p-2">Home</a>
-            <a href="#about" class="mobile-link text-slate-700 font-medium hover:text-blue-600 transition-colors p-2">Tentang</a>
-            <a href="#projects" class="mobile-link text-slate-700 font-medium hover:text-blue-600 transition-colors p-2">Proyek</a>
-            <a href="#experience" class="mobile-link text-slate-700 font-medium hover:text-blue-600 transition-colors p-2">Pengalaman</a>
-            <a href="#education" class="mobile-link text-slate-700 font-medium hover:text-blue-600 transition-colors p-2">Pendidikan</a>
-            <a href="#achievements" class="mobile-link text-slate-700 font-medium hover:text-blue-600 transition-colors p-2">Prestasi</a>
+        <div id="mobile-menu" class="fixed top-24 inset-x-6 md:hidden bg-white/60 backdrop-blur-2xl border border-white/40 p-6 flex flex-col space-y-4 rounded-3xl shadow-2xl transition-all duration-300 ease-in-out opacity-0 invisible scale-95 origin-top pointer-events-none z-50">
+            <a href="#home" class="nav-liquid-glass mobile-link text-slate-700 font-medium hover:text-blue-600 transition-all p-3 rounded-2xl">Home</a>
+            <a href="#about" class="nav-liquid-glass mobile-link text-slate-700 font-medium hover:text-blue-600 transition-all p-3 rounded-2xl">Tentang</a>
+            <a href="#projects" class="nav-liquid-glass mobile-link text-slate-700 font-medium hover:text-blue-600 transition-all p-3 rounded-2xl">Proyek</a>
+            <a href="#experience" class="nav-liquid-glass mobile-link text-slate-700 font-medium hover:text-blue-600 transition-all p-3 rounded-2xl">Pengalaman</a>
+            <a href="#education" class="nav-liquid-glass mobile-link text-slate-700 font-medium hover:text-blue-600 transition-all p-3 rounded-2xl">Pendidikan</a>
+            <a href="#achievements" class="nav-liquid-glass mobile-link text-slate-700 font-medium hover:text-blue-600 transition-all p-3 rounded-2xl">Prestasi</a>
         </div>
     </nav>
 
@@ -102,15 +184,19 @@
         <!-- Particles Background -->
         <div id="tsparticles" class="absolute inset-0 -z-20"></div>
 
+        <!-- Floating decorative blobs for glass effect enhancement -->
+        <div id="blob1" class="absolute top-20 left-10 w-80 h-80 bg-blue-500/30 rounded-full blur-[110px] -z-30 blob-effect"></div>
+        <div id="blob2" class="absolute bottom-20 right-10 w-[500px] h-[500px] bg-indigo-500/20 rounded-full blur-[130px] -z-30 blob-effect"></div>
+
         <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12">
             <div class="flex-1 text-center md:text-left order-2 md:order-1">
-                <h2 class="text-blue-600 font-semibold tracking-wide uppercase text-sm mb-3">Halo Semua 👋, Saya</h2>
+                <h2 class="text-blue-500 font-medium tracking-wider uppercase text-xs mb-3">Halo Semua 👋, Saya</h2>
                 <h1 id="typewriter" class="text-5xl md:text-7xl font-bold text-slate-900 mb-6 leading-tight min-h-[1.2em] typing-cursor"></h1>
-                <h3 class="text-xl md:text-2xl font-medium text-slate-500 mb-8 leading-relaxed">
+                <h3 class="text-xl md:text-2xl font-medium text-slate-600 mb-8 leading-relaxed">
                     IT & Web Developer • Internal Audit & Account Receivable <br class="hidden md:block"> 
-                    <span class="text-slate-400">at</span> <a href="https://royalbrongtohotel.com" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline decoration-2 underline-offset-4 transition-all">Royal Brongto Hotel</a>
+                    <span class="text-slate-400 italic">at</span> <a href="https://royalbrongtohotel.com" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:text-blue-600 decoration-blue-500/30 hover:decoration-blue-600 underline decoration-2 underline-offset-8 transition-all">Royal Brongto Hotel</a>
                 </h3>
-                <p class="text-slate-600 text-lg mb-10 max-w-lg leading-relaxed">
+                <p class="text-slate-500 text-lg mb-10 max-w-lg leading-relaxed">
                     Portofolio ini menampilkan proyek dan kontribusi saya sebagai pengembang teknologi yang berfokus pada integrasi sistem dan efisiensi bisnis.
                 </p>
                 <div class="flex gap-4 justify-center md:justify-start">
@@ -138,7 +224,7 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-24 bg-white">
+    <section id="about" class="py-24 relative">
         <div class="max-w-6xl mx-auto px-4">
             <div class="text-center mb-16">
                 <h2 class="text-4xl font-bold mb-4">Tentang Saya</h2>
@@ -149,7 +235,7 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <!-- Card 1: IT & Web Development Responsibilities -->
-                <div class="p-8 bg-white rounded-3xl shadow-xl border border-slate-100" data-aos="fade-up">
+                <div class="p-8 rounded-3xl glass-card" data-aos="fade-up">
                     <h3 class="text-xl font-bold text-blue-600 mb-4 italic">IT & Web Development</h3>
                     <ul class="text-slate-600 list-disc list-inside leading-relaxed space-y-2 text-base">
                         <li>Mengembangkan & menjaga website perusahaan.</li>
@@ -159,7 +245,7 @@
                 </div>
 
                 <!-- Card 2: Internal Audit & Account Receivable Responsibilities -->
-                <div class="p-8 bg-white rounded-3xl shadow-xl border border-slate-100" data-aos="fade-up" data-aos-delay="100">
+                <div class="p-8 rounded-3xl glass-card" data-aos="fade-up" data-aos-delay="100">
                     <h3 class="text-xl font-bold text-indigo-600 mb-4 italic">Internal Audit & Account Receivable</h3>
                     <ul class="text-slate-600 list-disc list-inside leading-relaxed space-y-2 text-base">
                         <li>Pengawasan Internal Audit (IA) untuk kepatuhan prosedur.</li>
@@ -170,7 +256,7 @@
                 </div>
 
                 <!-- Card 3: Tech Stack -->
-                <div class="p-8 bg-blue-600 text-white rounded-3xl shadow-xl" data-aos="fade-up" data-aos-delay="200">
+                <div class="p-8 bg-blue-600/60 backdrop-blur-2xl text-white rounded-3xl shadow-xl border border-white/30" data-aos="fade-up" data-aos-delay="200">
                     <h4 class="font-bold text-xl mb-6">Spesialisasi IT & Web Dev</h4>
                     <ul class="text-sm opacity-90 space-y-4">
                         <li class="flex items-center gap-3">
@@ -193,7 +279,7 @@
                 </div>
 
                 <!-- Card 4: Financial & Audit Skills -->
-                <div class="p-8 bg-white text-slate-900 rounded-3xl shadow-xl border border-slate-100" data-aos="fade-up" data-aos-delay="300">
+                <div class="p-8 rounded-3xl glass-card text-slate-900" data-aos="fade-up" data-aos-delay="300">
                     <h4 class="font-bold text-xl mb-6">Keahlian Audit & Finansial</h4>
                     <ul class="text-sm opacity-90 space-y-4">
                         <li class="flex items-center gap-3">
@@ -219,7 +305,7 @@
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="py-24 bg-slate-50">
+    <section id="projects" class="py-24 relative">
         <div class="max-w-6xl mx-auto px-4">
             <div class="text-center mb-16">
                 <h2 class="text-4xl font-bold mb-4">Project</h2>
@@ -227,7 +313,7 @@
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Project Card 1 -->
-                <a href="https://royalbrongtohotel.com" target="_blank" data-aos="fade-up" class="group bg-white rounded-3xl overflow-hidden hover:shadow-lg hover:border-blue-400 transition-all duration-500 border border-slate-200">
+                <a href="https://royalbrongtohotel.com" target="_blank" data-aos="fade-up" class="group glass-card tilt-card rounded-3xl overflow-hidden hover:shadow-2xl hover:border-blue-400/50">
                     <div class="h-48 overflow-hidden relative">
                         <img src="royalbrongto.png" alt="Royal Brongto Hotel Website" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
                         <div class="absolute inset-0 bg-blue-600/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
@@ -244,7 +330,7 @@
                     </div>
                 </a>
                 <!-- Project Card 2 -->
-                <a href="https://tamacellular.my.id" target="_blank" data-aos="fade-up" data-aos-delay="200" class="group bg-white rounded-3xl overflow-hidden hover:shadow-lg hover:border-blue-400 transition-all duration-500 border border-slate-200">
+                <a href="https://tamacellular.my.id" target="_blank" data-aos="fade-up" data-aos-delay="200" class="group glass-card tilt-card rounded-3xl overflow-hidden hover:shadow-2xl hover:border-blue-400/50">
                     <div class="h-48 overflow-hidden relative">
                         <img src="tama.png" alt="Employee Attendance System" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
                         <div class="absolute inset-0 bg-blue-600/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
@@ -261,7 +347,7 @@
                     </div>
                 </a>
                 <!-- Project Card 3 -->
-                <a href="https://github.com/yudhatiraaa/WhatsApp-Broadcast-Tool" target="_blank" data-aos="fade-up" data-aos-delay="400" class="group bg-white rounded-3xl overflow-hidden hover:shadow-lg hover:border-blue-400 transition-all duration-500 border border-slate-200">
+                <a href="https://github.com/yudhatiraaa/WhatsApp-Broadcast-Tool" target="_blank" data-aos="fade-up" data-aos-delay="400" class="group glass-card tilt-card rounded-3xl overflow-hidden hover:shadow-2xl hover:border-blue-400/50">
                     <div class="h-48 overflow-hidden relative">
                         <img src="wa.png" alt="Marketing Automation Tool" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
                         <div class="absolute inset-0 bg-blue-600/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
@@ -282,7 +368,7 @@
     </section>
 
     <!-- Experience Section -->
-    <section id="experience" class="py-24 bg-white overflow-hidden">
+    <section id="experience" class="py-24 relative overflow-hidden">
         <div class="max-w-6xl mx-auto px-4">
             <h2 class="text-4xl font-bold mb-20 text-center">Pengalaman Kerja</h2>
             
@@ -295,7 +381,7 @@
                     <div class="flex flex-col md:flex-row items-center">
                         <!-- Content Card -->
                         <div class="flex-1 w-full md:w-1/2 md:pr-12 md:text-right order-2 md:order-1 mt-6 md:mt-0">
-                            <div class="p-8 bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
+                            <div class="p-8 glass-card rounded-3xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group">
                                 <span class="inline-block px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-bold uppercase tracking-wider mb-4">2023 – PRESENT</span>
                                 <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">IA & AR, IT & Web Developer</h3>
                                 <p class="text-blue-600 font-medium mb-4">Royal Brongto Hotel, Yogyakarta</p>
@@ -329,7 +415,7 @@
 
                         <!-- Content Card -->
                         <div class="flex-1 w-full md:w-1/2 md:pl-12 order-2 md:order-3 mt-6 md:mt-0">
-                            <div class="p-8 bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
+                            <div class="p-8 glass-card rounded-3xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group">
                                 <span class="inline-block px-3 py-1 rounded-full bg-slate-100 text-slate-600 text-xs font-bold uppercase tracking-wider mb-4">2017 (Internship)</span>
                                 <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">Computer Technician</h3>
                                 <p class="text-slate-500 font-medium mb-4">Alfarizy Computer</p>
@@ -346,11 +432,11 @@
     </section>
 
     <!-- Education Section -->
-    <section id="education" class="py-24 bg-slate-50">
+    <section id="education" class="py-24 relative">
         <div class="max-w-6xl mx-auto px-4">
             <h2 class="text-4xl font-bold mb-16 text-center">Pendidikan</h2>
             <div class="flex flex-col md:flex-row justify-center gap-8">
-                <div class="p-8 bg-white rounded-3xl border border-slate-200 shadow-xl max-w-2xl w-full" data-aos="zoom-in">
+                <div class="p-8 glass-card rounded-3xl max-w-2xl w-full" data-aos="zoom-in">
                     <div class="flex justify-between items-start mb-4">
                         <div>
                             <h3 class="text-xl font-bold text-slate-900 mb-1">UNIVERSITAS AMIKOM YOGYAKARTA</h3>
@@ -374,12 +460,12 @@
     </section>
 
     <!-- Achievements Section -->
-    <section id="achievements" class="py-24 bg-white">
+    <section id="achievements" class="py-24 relative">
         <div class="max-w-6xl mx-auto px-4">
             <h2 class="text-4xl font-bold mb-16 text-center">Prestasi & Penghargaan</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Achievement 1 -->
-                <a href="https://drive.google.com/file/d/1J49hhEJkTT4gpk4pATMX2fga4TVklmaJ/view" target="_blank" rel="noopener noreferrer" class="group relative p-10 bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500" data-aos="fade-up">
+                <a href="https://drive.google.com/file/d/1J49hhEJkTT4gpk4pATMX2fga4TVklmaJ/view" target="_blank" rel="noopener noreferrer" class="group relative p-10 glass-card rounded-3xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-500" data-aos="fade-up">
                     <div class="mb-8 flex justify-between items-start">
                         <div class="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-500">
                             <i class="fa-solid fa-trophy text-2xl"></i>
@@ -391,7 +477,7 @@
                 </a>
 
                 <!-- Achievement 2 -->
-                <a href="https://drive.google.com/file/d/1u-viEzqQu4myhnTI-VzD3zQOTEk4dncJ/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="group relative p-10 bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500" data-aos="fade-up" data-aos-delay="100">
+                <a href="https://drive.google.com/file/d/1u-viEzqQu4myhnTI-VzD3zQOTEk4dncJ/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="group relative p-10 glass-card rounded-3xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-500" data-aos="fade-up" data-aos-delay="100">
                     <div class="mb-8 flex justify-between items-start">
                         <div class="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-500">
                             <i class="fa-solid fa-medal text-2xl"></i>
@@ -403,7 +489,7 @@
                 </a>
 
                 <!-- Achievement 3 -->
-                <a href="https://drive.google.com/file/d/1Jv8nUeETt041-thmYYhIPXxXi0jGftUm/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="group relative p-10 bg-slate-900 rounded-3xl shadow-xl hover:shadow-blue-900/20 hover:-translate-y-2 transition-all duration-500" data-aos="fade-up" data-aos-delay="200">
+                <a href="https://drive.google.com/file/d/1Jv8nUeETt041-thmYYhIPXxXi0jGftUm/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="group relative p-10 bg-slate-900/90 backdrop-blur-xl rounded-3xl shadow-xl hover:shadow-blue-900/20 hover:-translate-y-2 transition-all duration-500 border border-white/10" data-aos="fade-up" data-aos-delay="200">
                     <div class="mb-8 flex justify-between items-start">
                         <div class="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center text-blue-400 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-500">
                             <i class="fa-solid fa-award text-2xl"></i>
@@ -421,7 +507,7 @@
     </section>
 
     <!-- Footer / Contact -->
-    <footer class="bg-slate-900 text-slate-300 pt-24 pb-12 px-4">
+    <footer class="bg-slate-950/90 backdrop-blur-3xl text-slate-300 pt-24 pb-12 px-4 border-t border-white/5">
         <div class="max-w-6xl mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20" data-aos="fade-up">
                 <!-- Brand & Bio -->
@@ -482,7 +568,7 @@
     </footer>
 
     <!-- Back to Top Button -->
-    <button id="backToTop" class="fixed bottom-8 right-8 z-50 bg-blue-600 text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center opacity-0 invisible transition-all duration-300 hover:bg-blue-700 hover:scale-110 active:scale-95 focus:outline-none">
+    <button id="backToTop" class="fixed bottom-8 right-8 z-50 bg-blue-600/40 backdrop-blur-xl saturate-[180%] border border-white/30 text-white w-12 h-12 rounded-full shadow-xl flex items-center justify-center opacity-0 invisible transition-all duration-300 hover:bg-blue-600/60 hover:scale-110 active:scale-95 focus:outline-none">
         <i class="fa-solid fa-arrow-up text-xl"></i>
     </button>
 
@@ -569,7 +655,7 @@
         tsParticles.load("tsparticles", {
             fpsLimit: 60,
             particles: {
-                number: { value: 60, density: { enable: true, area: 800 } },
+                number: { value: 35, density: { enable: true, area: 1000 } },
                 color: { value: "#3b82f6" },
                 shape: { type: "circle" },
                 opacity: {
@@ -583,7 +669,7 @@
                 },
                 links: {
                     enable: true,
-                    distance: 150,
+                    distance: 120,
                     color: "#3b82f6",
                     opacity: 0.2,
                     width: 1
@@ -627,6 +713,80 @@
         });
 
         // Typewriter Effect Logic
+
+        // 3D Tilt & Glare Effect for Project Cards
+        const tiltCards = document.querySelectorAll('.tilt-card');
+        
+        tiltCards.forEach(card => {
+            // Create glare element dynamically
+            const glare = document.createElement('div');
+            glare.className = 'glare-effect';
+            card.appendChild(glare);
+
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = (centerY - y) / 15;
+                const rotateY = (x - centerX) / 15;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+                
+                // Update glare position to follow cursor
+                const glareX = (x / rect.width) * 100;
+                const glareY = (y / rect.height) * 100;
+                glare.style.background = `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,0.25) 0%, transparent 65%)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+                glare.style.background = 'transparent';
+            });
+        });
+
+        // Blob movement effect
+        const blob1 = document.getElementById('blob1');
+        const blob2 = document.getElementById('blob2');
+        const blobFactor = 0.03; // Sesuaikan untuk intensitas gerakan yang diinginkan
+
+        document.addEventListener('mousemove', (e) => {
+            const mouseX = e.clientX;
+            const mouseY = e.clientY;
+
+            const viewportCenterX = window.innerWidth / 2;
+            const viewportCenterY = window.innerHeight / 2;
+
+            // Hitung offset dari tengah viewport
+            const offsetX = (mouseX - viewportCenterX) * blobFactor;
+            const offsetY = (mouseY - viewportCenterY) * blobFactor;
+
+            // Terapkan transform untuk blob1 (bergerak searah kursor)
+            blob1.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+
+            // Terapkan transform untuk blob2 (bergerak berlawanan arah kursor untuk efek dinamis)
+            blob2.style.transform = `translate(${-offsetX * 0.8}px, ${-offsetY * 0.8}px)`;
+        });
+
+        // Active Section Intersection Observer
+        const observerOptions = { threshold: 0.5 };
+        const navObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    // Hanya berikan status active pada elemen dengan class .nav-liquid-glass (menu items)
+                    document.querySelectorAll('.nav-liquid-glass').forEach(link => {
+                        link.classList.toggle('nav-active', link.getAttribute('href') === `#${id}`);
+                    });
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section[id]').forEach(section => navObserver.observe(section));
+
         const textElement = document.getElementById('typewriter');
         const name = "Yudha Tira Pamungkas";
         let charIndex = 0;
@@ -635,7 +795,7 @@
             if (charIndex < name.length) {
                 textElement.textContent += name.charAt(charIndex);
                 charIndex++;
-                setTimeout(type, 100); // Kecepatan mengetik (ms)
+                setTimeout(type, 50); // Nilai lebih kecil = lebih cepat (misal: 50ms)
             } else {
                 // Hapus kursor setelah selesai mengetik (opsional)
                 setTimeout(() => textElement.classList.remove('typing-cursor'), 2000);
