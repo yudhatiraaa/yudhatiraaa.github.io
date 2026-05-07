@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yudha Tira Pamungkas | Web Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        
+        /* Efek fade-out di bawah agar foto tidak terlihat terpotong */
+        .mask-bottom-fade {
+            -webkit-mask-image: linear-gradient(to top, transparent 5%, black 25%);
+            mask-image: linear-gradient(to top, transparent 5%, black 25%);
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        .animate-float { animation: float 6s ease-in-out infinite; }
+
+        /* Cursor for typing effect */
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink {
+            from, to { opacity: 1 }
+            50% { opacity: 0 }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900">
+
+    <!-- Navbar -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-500 h-24 flex items-center">
+        <div class="max-w-6xl mx-auto px-6 w-full flex items-center justify-between">
+            <a href="#home" class="text-xl md:text-2xl font-bold tracking-tighter text-slate-900 hover:opacity-80 transition-opacity">
+                Yudha<span class="text-blue-600">.</span>
+            </a>
+            
+            <!-- Mobile Menu Toggle Button -->
+            <button id="menu-toggle" class="md:hidden text-slate-900 focus:outline-none p-2 hover:bg-slate-100 rounded-full transition-all">
+                <i class="fa-solid fa-bars-staggered text-xl transition-colors"></i>
+            </button>
+
+            <div class="hidden md:flex items-center space-x-1">
+                <a href="#home" class="px-4 py-2 rounded-full text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-all">Home</a>
+                <a href="#about" class="px-4 py-2 rounded-full text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-all">Tentang</a>
+                <a href="#projects" class="px-4 py-2 rounded-full text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-all">Proyek</a>
+                <a href="#experience" class="px-4 py-2 rounded-full text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-all">Pengalaman</a>
+                <a href="#education" class="px-4 py-2 rounded-full text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-all">Pendidikan</a>
+                <a href="#achievements" class="px-4 py-2 rounded-full text-sm font-medium bg-slate-900 text-white hover:bg-blue-600 transition-all ml-4">Prestasi</a>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu" class="fixed top-20 inset-x-6 md:hidden bg-white/90 backdrop-blur-xl border border-slate-200 p-6 flex flex-col space-y-4 rounded-3xl shadow-2xl transition-all duration-300 ease-in-out opacity-0 invisible scale-95 origin-top pointer-events-none z-50">
+            <a href="#home" class="mobile-link text-slate-700 font-medium hover:text-blue-600 transition-colors p-2">Home</a>
+            <a href="#about" class="mobile-link text-slate-700 font-medium hover:text-blue-600 transition-colors p-2">Tentang</a>
+            <a href="#projects" class="mobile-link text-slate-700 font-medium hover:text-blue-600 transition-colors p-2">Proyek</a>
+            <a href="#experience" class="mobile-link text-slate-700 font-medium hover:text-blue-600 transition-colors p-2">Pengalaman</a>
+            <a href="#education" class="mobile-link text-slate-700 font-medium hover:text-blue-600 transition-colors p-2">Pendidikan</a>
+            <a href="#achievements" class="mobile-link text-slate-700 font-medium hover:text-blue-600 transition-colors p-2">Prestasi</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative pt-48 pb-32 px-4 overflow-hidden">
+        <!-- Particles Background -->
+        <div id="tsparticles" class="absolute inset-0 -z-20"></div>
+
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12">
+            <div class="flex-1 text-center md:text-left order-2 md:order-1">
+                <h2 class="text-blue-600 font-semibold tracking-wide uppercase text-sm mb-3">Halo Semua 👋, Saya</h2>
+                <h1 id="typewriter" class="text-5xl md:text-7xl font-bold text-slate-900 mb-6 leading-tight min-h-[1.2em] typing-cursor"></h1>
+                <h3 class="text-xl md:text-2xl font-medium text-slate-500 mb-8 leading-relaxed">
+                    IT & Web Developer • Internal Audit & Account Receivable <br class="hidden md:block"> 
+                    <span class="text-slate-400">at</span> <a href="https://royalbrongtohotel.com" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline decoration-2 underline-offset-4 transition-all">Royal Brongto Hotel</a>
+                </h3>
+                <p class="text-slate-600 text-lg mb-10 max-w-lg leading-relaxed">
+                    Portofolio ini menampilkan proyek dan kontribusi saya sebagai pengembang teknologi yang berfokus pada integrasi sistem dan efisiensi bisnis.
+                </p>
+                <div class="flex gap-4 justify-center md:justify-start">
+                    <a href="#projects" class="group bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 py-4 rounded-full font-bold shadow-lg shadow-blue-600/20 hover:from-blue-700 hover:to-indigo-700 hover:shadow-blue-600/40 hover:-translate-y-1 transition-all duration-300 flex items-center gap-3">
+                        Lihat Karya
+                        <i class="fa-solid fa-arrow-right text-sm group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="flex-1 relative order-1 md:order-2">
+                <!-- Efek pendaran cahaya di belakang -->
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 md:w-[450px] md:h-[450px] bg-blue-400/10 rounded-full blur-3xl -z-10"></div>
+                
+                <div class="relative w-64 h-64 md:w-[440px] md:h-[440px] mx-auto flex items-end justify-center animate-float">
+                    <!-- Lingkaran Dekoratif -->
+                    <div class="absolute bottom-4 w-56 h-56 md:w-[380px] md:h-[380px] bg-gradient-to-tr from-blue-600/10 to-indigo-500/10 rounded-full border border-blue-100"></div>
+                    
+                    <!-- Foto Profil Wrapper for Parallax -->
+                    <div id="hero-image-parallax" class="relative z-10 w-full h-full transition-transform duration-75 ease-out">
+                        <img src="yudha.png" alt="Yudha Tira Pamungkas" class="w-full h-full object-contain drop-shadow-xl mask-bottom-fade transition-transform duration-500 hover:scale-[1.02]">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 bg-white">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Tentang Saya</h2>
+                <p class="text-slate-600 text-lg leading-relaxed max-w-3xl mx-auto">
+                    Sebagai IT dan IA & AR di Royal Brongto Hotel, saya bertanggung jawab penuh atas pengembangan sistem informasi internal serta memastikan integritas data finansial.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Card 1: IT & Web Development Responsibilities -->
+                <div class="p-8 bg-white rounded-3xl shadow-xl border border-slate-100" data-aos="fade-up">
+                    <h3 class="text-xl font-bold text-blue-600 mb-4 italic">IT & Web Development</h3>
+                    <ul class="text-slate-600 list-disc list-inside leading-relaxed space-y-2 text-base">
+                        <li>Mengembangkan & menjaga website perusahaan.</li>
+                        <li>Desain grafis untuk promosi dan operasional hotel.</li>
+                        <li>Manajemen jaringan.</li>
+                    </ul>
+                </div>
+
+                <!-- Card 2: Internal Audit & Account Receivable Responsibilities -->
+                <div class="p-8 bg-white rounded-3xl shadow-xl border border-slate-100" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="text-xl font-bold text-indigo-600 mb-4 italic">Internal Audit & Account Receivable</h3>
+                    <ul class="text-slate-600 list-disc list-inside leading-relaxed space-y-2 text-base">
+                        <li>Pengawasan Internal Audit (IA) untuk kepatuhan prosedur.</li>
+                        <li>Manajemen Account Receivable (AR) dan penagihan piutang</li>
+                        <li>Rekonsiliasi dan validasi integritas data finansial harian.</li>
+                        <li>Pelaporan analisis keuangan untuk mendukung kebijakan bisnis.</li>
+                    </ul>
+                </div>
+
+                <!-- Card 3: Tech Stack -->
+                <div class="p-8 bg-blue-600 text-white rounded-3xl shadow-xl" data-aos="fade-up" data-aos-delay="200">
+                    <h4 class="font-bold text-xl mb-6">Spesialisasi IT & Web Dev</h4>
+                    <ul class="text-sm opacity-90 space-y-4">
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-server w-5 text-center text-blue-200"></i>
+                            <span><span class="font-semibold">Backend:</span> PHP (Native), Node.js.</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-database w-5 text-center text-blue-200"></i>
+                            <span><span class="font-semibold">Database:</span> MySQL.</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-laptop-code w-5 text-center text-blue-200"></i>
+                            <span><span class="font-semibold">Frontend Dasar:</span> HTML, CSS, JavaScript.</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-palette w-5 text-center text-blue-200"></i>
+                            <span><span class="font-semibold">Design:</span> CorelDRAW, Canva.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Card 4: Financial & Audit Skills -->
+                <div class="p-8 bg-white text-slate-900 rounded-3xl shadow-xl border border-slate-100" data-aos="fade-up" data-aos-delay="300">
+                    <h4 class="font-bold text-xl mb-6">Keahlian Audit & Finansial</h4>
+                    <ul class="text-sm opacity-90 space-y-4">
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-clipboard-check w-5 text-center text-blue-600"></i>
+                            <span class="font-semibold">Audit Internal (IA)</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-file-invoice-dollar w-5 text-center text-blue-600"></i>
+                            <span class="font-semibold">Account Receivable (AR)</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-shield-halved w-5 text-center text-blue-600"></i>
+                            <span class="font-semibold">Integritas Data Finansial</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-check-double w-5 text-center text-blue-600"></i>
+                            <span class="font-semibold">Kepatuhan Sistem</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-24 bg-slate-50">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Project</h2>
+                <p class="text-slate-500">Berikut beberapa project yang pernah dikembangkan</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Project Card 1 -->
+                <a href="https://royalbrongtohotel.com" target="_blank" data-aos="fade-up" class="group bg-white rounded-3xl overflow-hidden hover:shadow-lg hover:border-blue-400 transition-all duration-500 border border-slate-200">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="royalbrongto.png" alt="Royal Brongto Hotel Website" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-blue-600/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                            <span class="text-white font-semibold border border-white px-4 py-2 rounded-lg">Kunjungi Situs</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2 group-hover:text-blue-600 transition">Royal Brongto Hotel Website</h3>
+                        <p class="text-slate-600 text-sm mb-4">Merancang dan mengembangkan website resmi hotel untuk meningkatkan kehadiran digital.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="text-xs bg-blue-50 text-blue-600 px-2 py-1 rounded-full">UI/UX Design</span>
+                            <span class="text-xs bg-blue-50 text-blue-600 px-2 py-1 rounded-full">Web Development</span>
+                        </div>
+                    </div>
+                </a>
+                <!-- Project Card 2 -->
+                <a href="https://tamacellular.my.id" target="_blank" data-aos="fade-up" data-aos-delay="200" class="group bg-white rounded-3xl overflow-hidden hover:shadow-lg hover:border-blue-400 transition-all duration-500 border border-slate-200">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="tama.png" alt="Employee Attendance System" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-blue-600/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                            <span class="text-white font-semibold border border-white px-4 py-2 rounded-lg">Lihat Demo</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2 group-hover:text-blue-600 transition">Employee Attendance System</h3>
+                        <p class="text-slate-600 text-sm mb-4">Mengimplementasikan sistem absensi berbasis geofencing dan otentikasi visual (kamera) untuk Tama Cellular, memastikan validasi lokasi presisi dan integritas data kehadiran karyawan.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="text-xs bg-blue-50 text-blue-600 px-2 py-1 rounded-full">Geofencing</span>
+                            <span class="text-xs bg-blue-50 text-blue-600 px-2 py-1 rounded-full">PHP</span>
+                        </div>
+                    </div>
+                </a>
+                <!-- Project Card 3 -->
+                <a href="https://github.com/yudhatiraaa/WhatsApp-Broadcast-Tool" target="_blank" data-aos="fade-up" data-aos-delay="400" class="group bg-white rounded-3xl overflow-hidden hover:shadow-lg hover:border-blue-400 transition-all duration-500 border border-slate-200">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="wa.png" alt="Marketing Automation Tool" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-blue-600/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                            <span class="text-white font-semibold border border-white px-4 py-2 rounded-lg">Source Code</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2 group-hover:text-blue-600 transition">Marketing Automation Tool</h3>
+                        <p class="text-slate-600 text-sm mb-4">Tool otomatisasi pesan berbasis Node.js, dirancang untuk efisiensi blasting promosi dan notifikasi marketing.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="text-xs bg-blue-50 text-blue-600 px-2 py-1 rounded-full">Node.js</span>
+                            <span class="text-xs bg-blue-50 text-blue-600 px-2 py-1 rounded-full">Automation</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-24 bg-white overflow-hidden">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-4xl font-bold mb-20 text-center">Pengalaman Kerja</h2>
+            
+            <div class="relative">
+                <!-- Center Line (Desktop) -->
+                <div class="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-slate-200 -translate-x-1/2"></div>
+
+                <!-- Experience Item 1 -->
+                <div class="relative mb-16 md:mb-24" data-aos="fade-right">
+                    <div class="flex flex-col md:flex-row items-center">
+                        <!-- Content Card -->
+                        <div class="flex-1 w-full md:w-1/2 md:pr-12 md:text-right order-2 md:order-1 mt-6 md:mt-0">
+                            <div class="p-8 bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
+                                <span class="inline-block px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-bold uppercase tracking-wider mb-4">2023 – PRESENT</span>
+                                <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">IA & AR, IT & Web Developer</h3>
+                                <p class="text-blue-600 font-medium mb-4">Royal Brongto Hotel, Yogyakarta</p>
+                                <ul class="text-slate-600 text-sm space-y-3 list-none">
+                                    <li>Mengembangkan dan mengelola website resmi royalbrongtohotel.com beserta integrasi sistem pemesanan online.</li>
+                                    <li>Mengawasi integritas arus kas melalui pengawasan ketat pada Internal Audit dan Accounts Receivable.</li>
+                                    <li>Mengembangkan bot WhatsApp Marketing berbasis Node.js untuk kebutuhan blasting pesan promosi.</li>
+                                    <li>Merancang materi desain grafis untuk kebutuhan promosi dan standarisasi aset visual operasional hotel.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Milestone Icon -->
+                        <div class="absolute left-4 md:left-1/2 w-10 h-10 bg-blue-600 rounded-full -translate-x-1/2 flex items-center justify-center z-10 shadow-lg shadow-blue-200 order-1 md:order-2">
+                            <i class="fa-solid fa-hotel text-white text-sm"></i>
+                        </div>
+
+                        <div class="flex-1 hidden md:block order-3"></div>
+                    </div>
+                </div>
+
+                <!-- Experience Item 2 -->
+                <div class="relative mb-8" data-aos="fade-left">
+                    <div class="flex flex-col md:flex-row items-center">
+                        <div class="flex-1 hidden md:block order-1"></div>
+
+                        <!-- Milestone Icon -->
+                        <div class="absolute left-4 md:left-1/2 w-10 h-10 bg-slate-200 rounded-full -translate-x-1/2 flex items-center justify-center z-10 shadow-lg order-1 md:order-2">
+                            <i class="fa-solid fa-laptop-code text-slate-500 text-sm"></i>
+                        </div>
+
+                        <!-- Content Card -->
+                        <div class="flex-1 w-full md:w-1/2 md:pl-12 order-2 md:order-3 mt-6 md:mt-0">
+                            <div class="p-8 bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
+                                <span class="inline-block px-3 py-1 rounded-full bg-slate-100 text-slate-600 text-xs font-bold uppercase tracking-wider mb-4">2017 (Internship)</span>
+                                <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">Computer Technician</h3>
+                                <p class="text-slate-500 font-medium mb-4">Alfarizy Computer</p>
+                                <ul class="text-slate-600 text-sm space-y-3 list-none">
+                                    <li>Mendiagnosis dan menyelesaikan kompleksitas teknis pada perangkat keras dan lunak klien.</li>
+                                    <li>Mengoptimalkan performa sistem melalui perakitan workstation dan konfigurasi jaringan LAN/WLAN.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-24 bg-slate-50">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-4xl font-bold mb-16 text-center">Pendidikan</h2>
+            <div class="flex flex-col md:flex-row justify-center gap-8">
+                <div class="p-8 bg-white rounded-3xl border border-slate-200 shadow-xl max-w-2xl w-full" data-aos="zoom-in">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-1">UNIVERSITAS AMIKOM YOGYAKARTA</h3>
+                            <p class="text-blue-600 font-medium">Bachelor of Informatics (S1)</p>
+                        </div>
+                        <span class="bg-blue-600 text-white px-3 py-1 rounded-lg text-sm font-bold">GPA: 3.64</span>
+                    </div>
+                    <div class="flex items-center text-slate-500 text-sm gap-4">
+                        <span class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                            2019 - 2023
+                        </span>
+                        <span class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                            Yogyakarta
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section id="achievements" class="py-24 bg-white">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-4xl font-bold mb-16 text-center">Prestasi & Penghargaan</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Achievement 1 -->
+                <a href="https://drive.google.com/file/d/1J49hhEJkTT4gpk4pATMX2fga4TVklmaJ/view" target="_blank" rel="noopener noreferrer" class="group relative p-10 bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500" data-aos="fade-up">
+                    <div class="mb-8 flex justify-between items-start">
+                        <div class="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-500">
+                            <i class="fa-solid fa-trophy text-2xl"></i>
+                        </div>
+                        <span class="text-slate-400 font-bold text-sm tracking-[0.2em]">2018</span>
+                    </div>
+                    <h3 class="font-bold text-slate-900 text-xl mb-3 leading-tight group-hover:text-blue-600 transition-colors">Juara 1 LKS Web Design</h3>
+                    <p class="text-slate-500 leading-relaxed">Kategori Sekolah Swasta • Kabupaten Sleman</p>
+                </a>
+
+                <!-- Achievement 2 -->
+                <a href="https://drive.google.com/file/d/1u-viEzqQu4myhnTI-VzD3zQOTEk4dncJ/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="group relative p-10 bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500" data-aos="fade-up" data-aos-delay="100">
+                    <div class="mb-8 flex justify-between items-start">
+                        <div class="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-500">
+                            <i class="fa-solid fa-medal text-2xl"></i>
+                        </div>
+                        <span class="text-slate-400 font-bold text-sm tracking-[0.2em]">2017</span>
+                    </div>
+                    <h3 class="font-bold text-slate-900 text-xl mb-3 leading-tight group-hover:text-blue-600 transition-colors">Juara 1 LKS Web Design</h3>
+                    <p class="text-slate-500 leading-relaxed">Kategori Sekolah Swasta • Kabupaten Sleman</p>
+                </a>
+
+                <!-- Achievement 3 -->
+                <a href="https://drive.google.com/file/d/1Jv8nUeETt041-thmYYhIPXxXi0jGftUm/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="group relative p-10 bg-slate-900 rounded-3xl shadow-xl hover:shadow-blue-900/20 hover:-translate-y-2 transition-all duration-500" data-aos="fade-up" data-aos-delay="200">
+                    <div class="mb-8 flex justify-between items-start">
+                        <div class="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center text-blue-400 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-500">
+                            <i class="fa-solid fa-award text-2xl"></i>
+                        </div>
+                        <span class="text-slate-500 font-bold text-sm tracking-[0.2em]">2017</span>
+                    </div>
+                    <h3 class="font-bold text-white text-xl mb-3 leading-tight">Bronze Medal Film Indie</h3>
+                    <p class="text-slate-400 mb-6 italic">Olimpiade Ahmad Dahlan V (Tingkat Nasional)</p>
+                    <div class="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-[11px] font-bold uppercase tracking-widest rounded-full">
+                        Prestasi Nasional
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer / Contact -->
+    <footer class="bg-slate-900 text-slate-300 pt-24 pb-12 px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20" data-aos="fade-up">
+                <!-- Brand & Bio -->
+                <div class="col-span-1 md:col-span-2">
+                    <a href="#home" class="text-2xl font-bold text-white mb-6 block tracking-tighter">
+                        Yudha<span class="text-blue-600">.</span>
+                    </a>
+                    <p class="text-slate-400 max-w-sm mb-8 leading-relaxed italic">
+                        Pengembang teknologi yang berfokus pada integrasi sistem, efisiensi bisnis, dan pengalaman pengguna yang berkualitas.
+                    </p>
+                    <div class="flex gap-5">
+                        <a href="#" class="text-slate-400 hover:text-blue-400 transition-all duration-300 text-xl hover:scale-125"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="https://github.com/yudhatiraaa" target="_blank" class="text-slate-400 hover:text-blue-400 transition-all duration-300 text-xl hover:scale-125"><i class="fa-brands fa-github"></i></a>
+                        <a href="#" class="text-slate-400 hover:text-blue-400 transition-all duration-300 text-xl hover:scale-125"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="#" class="text-slate-400 hover:text-blue-400 transition-all duration-300 text-xl hover:scale-125"><i class="fa-brands fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <!-- Quick Navigation -->
+                <div>
+                    <h4 class="text-white font-bold mb-6 uppercase tracking-wider text-sm">Navigasi</h4>
+                    <ul class="space-y-4 text-sm font-medium">
+                        <li><a href="#home" class="hover:text-blue-500 transition-all duration-300 hover:translate-x-2 inline-block">Home</a></li>
+                        <li><a href="#about" class="hover:text-blue-500 transition-all duration-300 hover:translate-x-2 inline-block">Tentang Saya</a></li>
+                        <li><a href="#projects" class="hover:text-blue-500 transition-all duration-300 hover:translate-x-2 inline-block">Proyek</a></li>
+                        <li><a href="#experience" class="hover:text-blue-500 transition-all duration-300 hover:translate-x-2 inline-block">Pengalaman</a></li>
+                        <li><a href="#achievements" class="hover:text-blue-500 transition-all duration-300 hover:translate-x-2 inline-block">Prestasi</a></li>
+                    </ul>
+                </div>
+
+                <!-- Direct Contact -->
+                <div>
+                    <h4 class="text-white font-bold mb-6 uppercase tracking-wider text-sm">Kontak Cepat</h4>
+                    <ul class="space-y-4 text-sm text-slate-400">
+                        <li class="flex items-start gap-3 group">
+                            <i class="fa-solid fa-envelope text-blue-500 mt-1"></i>
+                            <a href="mailto:Yudhatira2001@gmail.com" class="group-hover:text-white transition-colors italic">Yudhatira2001@gmail.com</a>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-phone text-blue-500 mt-1"></i>
+                            <span>+62 895 410 2255 94</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-location-dot text-blue-500 mt-1"></i>
+                            <span>Sleman, Yogyakarta</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-6">
+                <p class="text-slate-500 text-xs tracking-wide uppercase font-medium">
+                    &copy; 2024 Yudha Tira Pamungkas. All Rights Reserved.
+                </p>
+                <p class="text-slate-600 text-[10px] uppercase tracking-[0.2em] font-bold">Built with precision</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="fixed bottom-8 right-8 z-50 bg-blue-600 text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center opacity-0 invisible transition-all duration-300 hover:bg-blue-700 hover:scale-110 active:scale-95 focus:outline-none">
+        <i class="fa-solid fa-arrow-up text-xl"></i>
+    </button>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
+    <script>
+        AOS.init({ duration: 800, once: true });
+
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        const menuIcon = menuToggle.querySelector('i');
+
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('opacity-0');
+            mobileMenu.classList.toggle('invisible');
+            mobileMenu.classList.toggle('scale-95');
+            mobileMenu.classList.toggle('pointer-events-none');
+            
+            // Animasi ikon
+            menuIcon.classList.toggle('fa-bars-staggered');
+            menuIcon.classList.toggle('fa-xmark');
+        });
+
+        // Close menu when a link is clicked
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('opacity-0', 'invisible', 'scale-95', 'pointer-events-none');
+                menuIcon.classList.add('fa-bars-staggered');
+                menuIcon.classList.remove('fa-xmark');
+            });
+        });
+
+        // Back to Top Logic
+        const backToTopBtn = document.getElementById('backToTop');
+
+        window.addEventListener('scroll', () => {
+            // Munculkan tombol jika scroll lebih dari 400px
+            if (window.scrollY > 400) {
+                backToTopBtn.classList.remove('opacity-0', 'invisible');
+                backToTopBtn.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopBtn.classList.add('opacity-0', 'invisible');
+                backToTopBtn.classList.remove('opacity-100', 'visible');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Navbar Scroll Transition Logic
+        const navbar = document.getElementById('navbar');
+        const scrollThreshold = 50; // Jarak scroll dalam piksel sebelum navbar berubah
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > scrollThreshold) {
+                // Tambahkan kelas untuk tampilan navbar saat discroll
+                navbar.classList.add('bg-white/80', 'backdrop-blur-md', 'border-b', 'border-slate-200', 'h-16');
+                navbar.classList.remove('h-24');
+            } else {
+                // Hapus kelas untuk mengembalikan tampilan navbar ke awal
+                navbar.classList.remove('bg-white/80', 'backdrop-blur-md', 'border-b', 'border-slate-200', 'h-16');
+                navbar.classList.add('h-24');
+            }
+        });
+
+        // Particles Background Initialization
+        tsParticles.load("tsparticles", {
+            fpsLimit: 60,
+            particles: {
+                number: { value: 60, density: { enable: true, area: 800 } },
+                color: { value: "#3b82f6" },
+                shape: { type: "circle" },
+                opacity: {
+                    value: 0.4,
+                    random: true,
+                    anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false }
+                },
+                size: {
+                    value: { min: 1, max: 3 },
+                    random: true
+                },
+                links: {
+                    enable: true,
+                    distance: 150,
+                    color: "#3b82f6",
+                    opacity: 0.2,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 1.5,
+                    direction: "none",
+                    random: false,
+                    straight: false,
+                    outModes: { default: "out" }
+                }
+            },
+            interactivity: {
+                events: {
+                    onHover: { enable: true, mode: "grab" },
+                    resize: true
+                },
+                modes: {
+                    grab: { distance: 180, links: { opacity: 0.5 } }
+                }
+            },
+            retina_detect: true
+        });
+
+        // Hero Image Parallax & Background Blur
+        const parallaxImage = document.getElementById('hero-image-parallax');
+        const particlesBg = document.getElementById('tsparticles');
+
+        window.addEventListener('scroll', () => {
+            const speed = 0.1; // Sesuaikan intensitas parallax (0.1 berarti bergerak 10% dari kecepatan scroll)
+            const yPos = window.scrollY * speed;
+
+            // Optimasi: Hanya jalankan animasi jika area hero masih terlihat
+            if (window.scrollY < 1000) {
+                parallaxImage.style.transform = `translateY(${yPos}px)`;
+                // Efek blur dinamis pada background partikel (maksimal 5px)
+                const blurAmount = Math.min(window.scrollY / 100, 5);
+                particlesBg.style.filter = `blur(${blurAmount}px)`;
+            }
+        });
+
+        // Typewriter Effect Logic
+        const textElement = document.getElementById('typewriter');
+        const name = "Yudha Tira Pamungkas";
+        let charIndex = 0;
+
+        function type() {
+            if (charIndex < name.length) {
+                textElement.textContent += name.charAt(charIndex);
+                charIndex++;
+                setTimeout(type, 100); // Kecepatan mengetik (ms)
+            } else {
+                // Hapus kursor setelah selesai mengetik (opsional)
+                setTimeout(() => textElement.classList.remove('typing-cursor'), 2000);
+            }
+        }
+
+        // Jalankan efek saat halaman dimuat
+        window.addEventListener('DOMContentLoaded', type);
+
+    </script>
+</body>
+</html>
